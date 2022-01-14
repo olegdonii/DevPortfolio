@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{B0FA1423-DF0D-4583-994E-B77D4AC27757}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{0F274967-475D-4DC7-BB8D-2A3EDCE9D11E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B0FA1423-DF0D-4583-994E-B77D4AC27757} = {B0FA1423-DF0D-4583-994E-B77D4AC27757}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{7C4B49DD-BB45-4605-8DF7-FA8E993A822D}"
 EndProject

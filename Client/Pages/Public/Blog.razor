@@ -1,5 +1,6 @@
 ﻿@page "/blog"
 @using Client.Components.Public.Blog
+
 @inject InMemoryDatabaseCache InMemoryDatabaseCache
 @implements IDisposable
 
@@ -17,7 +18,7 @@
                     for (int i = 0; i < InMemoryDatabaseCache.Categories.Count; i++)
                     {
                         <div class="col-md-4">
-                            <CategoryCard Category="InMemoryDatabaseCache.Categories[i]"/>
+                            <CategoryCard category="InMemoryDatabaseCache.Categories[i]"/>
                         </div>
                     }
                 }

@@ -6,21 +6,20 @@ namespace Client.Services
 {
     internal sealed class InMemoryDatabaseCache
     {
-        private readonly HttpClient _httpclient;
+        private readonly HttpClient _httpClient;
 
         public InMemoryDatabaseCache(HttpClient httpClient)
         {
-            _httpclient = httpClient;
+            _httpClient = httpClient;
         }
 
         private List<Category> _categories = null;
-        internal List<Category> Categories 
+        internal List<Category> Categories
         {
             get
             {
                 return _categories;
             }
-
             set
             {
                 _categories = value;
@@ -28,17 +27,16 @@ namespace Client.Services
             }
         }
 
-        private bool _gettingCategoriesFromDatabaseAndCache = false;
+        private bool _gettingCategoriesFromDatabaseAndCaching = false;
         internal async Task GetCategoriesFromDatabaseAndCache()
         {
-            //Only allow one Get request to run at a time
-            if(_gettingCategoriesFromDatabaseAndCache == false)
+            // Only allow one Get request to run at a time.
+            if (_gettingCategoriesFromDatabaseAndCaching == false)
             {
-                _gettingCategoriesFromDatabaseAndCache = true;
-                _categories = await _httpclient.GetFromJsonAsync<List<Category>>(ApiEndpoints.s_categories);
-                _gettingCategoriesFromDatabaseAndCache = false;
-            }
-            
+                _gettingCategoriesFromDatabaseAndCaching = true;
+                _categories = await _httpClient.GetFromJsonAsync<List<Category>>(ApiEndpoints.s_categories);
+                _gettingCategoriesFromDatabaseAndCaching = false;
+            }            
         }
 
         internal event Action OnCategoriesDataChanged;

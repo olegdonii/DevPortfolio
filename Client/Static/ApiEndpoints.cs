@@ -2,11 +2,11 @@ namespace Client.Static
 {
     internal static class ApiEndpoints
     {
-        #if DEBUG
+#if DEBUG
         internal const string ServerBaseUrl = "https://localhost:5003";
-        #else
+#else
         internal const string ServerBaseUrl = "https://appname.azurewebsites.net";
-        #endif
+#endif
 
         internal readonly static string s_categories = $"{ServerBaseUrl}/api/categories";
     }

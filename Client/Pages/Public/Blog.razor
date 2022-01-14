@@ -1,5 +1,7 @@
 ﻿@page "/blog"
 @using Client.Components.Public.Blog
+@inject InMemoryDatabaseCache InMemoryDatabaseCache
+@implements IDisposable
 
 @*<Navbar/>*@
 
@@ -10,24 +12,37 @@
             <p>Click a category card to view its blog posts.</p>
 
             <div class="row">
-                <div class="col-md-4">
-                    <CategoryCard />
-                </div>
-
-                <div class="col-md-4">
-                    <CategoryCard />
-                </div>
-
-                <div class="col-md-4">
-                    <CategoryCard />
-                </div>
-
+                @if (InMemoryDatabaseCache.Categories != null)
+                {
+                    for (int i = 0; i < InMemoryDatabaseCache.Categories.Count; i++)
+                    {
+                        <div class="col-md-4">
+                            <CategoryCard />
+                        </div>
+                    }
+                }
             </div>
         </div>
     </div>
 
 </main>
 
+
 @code {
 
+    protected override async Task OnInitializedAsync()
+    {
+        InMemoryDatabaseCache.OnCategoriesDataChanged += StateHasChanged;
+
+        if (InMemoryDatabaseCache.Categories == null)
+        {
+            await InMemoryDatabaseCache.GetCategoriesFromDatabaseAndCache();
+        }
+    }
+
+    // Unsubscribe from events Dispose(), else we'll create a memory leak.
+    public void Dispose()
+    {
+        InMemoryDatabaseCache.OnCategoriesDataChanged -= StateHasChanged;
+    }
 }

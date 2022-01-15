@@ -4,15 +4,14 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddCors(options => 
+builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
         builder =>
         builder
-        .WithOrigins("https://victorious-sand-097799203.1.azurestaticapps.net")
         .AllowAnyOrigin()
         .AllowAnyMethod()
-        .AllowAnyHeader());    
+        .AllowAnyHeader());
 });
 builder.Services.AddDbContext<AppDbContext>(options => 
       options.UseSqlite("Data Source=./Data/AppDB.db"));
@@ -41,6 +40,8 @@ app.UseSwaggerUI(swaggerUIOptions =>
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
 
 app.UseCors("CorsPolicy");
 

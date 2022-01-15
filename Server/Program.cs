@@ -9,6 +9,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("CorsPolicy",
         builder =>
         builder
+        .WithOrigins("https://victorious-sand-097799203.1.azurestaticapps.net")
         .AllowAnyOrigin()
         .AllowAnyMethod()
         .AllowAnyHeader());    

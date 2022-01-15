@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Data;
@@ -17,7 +16,6 @@ namespace Server.Controllers
             _db = db;
         }
 
-        [DisableCors]
         [HttpGet]
         public async Task<IActionResult> GetCategories()
         {

@@ -3,6 +3,13 @@
 
 name: Build and deploy ASP.Net Core app to Azure Web App - ODServer
 
+env:
+  AZURE_WEBAPP_NAME: ODServer
+  AZURE_WEBAPP_PACKAGE_PATH: Server\publish
+  CONFIGURATION: Release
+  DOTNET_CORE_VERSION: 6.0.x
+  WORKING_DIRECTORY: Server
+
 on:
   push:
     branches:

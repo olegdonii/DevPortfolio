@@ -1,17 +1,26 @@
 using Server.Data;
 using Microsoft.EntityFrameworkCore;
 
+var MyAllowSpecificOrigins = "CorsPolicy";
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy",
+    options.AddPolicy(name: MyAllowSpecificOrigins,
         builder =>
         builder
         .AllowAnyOrigin()
         .AllowAnyMethod()
         .AllowAnyHeader());
+
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins("http://odserver.azurewebsites.net",
+                                "https://odserver.azurewebsites.net");
+        });
 });
 builder.Services.AddDbContext<AppDbContext>(options => 
       options.UseSqlite("Data Source=./Data/AppDB.db"));
@@ -20,6 +29,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -43,7 +54,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseCors("CorsPolicy");
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

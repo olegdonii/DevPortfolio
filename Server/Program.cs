@@ -31,7 +31,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(swaggerUIOptions =>
+{
+    swaggerUIOptions.SwaggerEndpoint("/swagger/v1/swagger.json", "Portfolio API");
+    swaggerUIOptions.RoutePrefix = string.Empty;
+});
 
 app.UseStaticFiles();
 

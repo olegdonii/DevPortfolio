@@ -5,7 +5,7 @@ namespace Client.Static
 #if DEBUG
         internal const string ServerBaseUrl = "https://localhost:5003";
 #else
-        internal const string ServerBaseUrl = "https://odserver.azurewebsites.net";
+        internal const string ServerBaseUrl = "https://apiserver.azure-api.net";
 #endif
 
         internal readonly static string s_categories = $"{ServerBaseUrl}/api/categories";

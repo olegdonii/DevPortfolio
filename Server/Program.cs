@@ -9,9 +9,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: "MyPolicy",
         builder =>
         {
-            builder.WithOrigins("http://example.com/",
-                                "http://www.contoso.com/%22")
-                    .WithMethods("PUT", "DELETE", "GET");
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
         });
 });
 

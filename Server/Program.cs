@@ -15,6 +15,7 @@ builder.Services.AddCors(options =>
         });
 });
 
+
 builder.Services.AddDbContext<AppDbContext>(options =>
       options.UseSqlite("Data Source=./Data/AppDB.db"));
 builder.Services.AddRouting(options => options.LowercaseUrls = true);

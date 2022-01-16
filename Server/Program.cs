@@ -6,13 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy",
+    options.AddPolicy(name: "MyPolicy",
         builder =>
-        builder
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader());
+        {
+            builder.WithOrigins("http://example.com/",
+                                "http://www.contoso.com/%22")
+                    .WithMethods("PUT", "DELETE", "GET");
+        });
 });
+
 builder.Services.AddDbContext<AppDbContext>(options =>
       options.UseSqlite("Data Source=./Data/AppDB.db"));
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
@@ -43,7 +45,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseCors("CorsPolicy");
+app.UseCors();
 
 app.UseAuthorization();
 

@@ -4,16 +4,19 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddCors(options => 
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy",
+    options.AddPolicy(name: "MyPolicy",
         builder =>
-        builder
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader());    
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
 });
-builder.Services.AddDbContext<AppDbContext>(options => 
+
+
+builder.Services.AddDbContext<AppDbContext>(options =>
       options.UseSqlite("Data Source=./Data/AppDB.db"));
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
@@ -30,11 +33,20 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseSwagger();
+app.UseSwaggerUI(swaggerUIOptions =>
+{
+    swaggerUIOptions.SwaggerEndpoint("/swagger/v1/swagger.json", "Portfolio API");
+    swaggerUIOptions.RoutePrefix = string.Empty;
+});
+
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
-app.UseCors("CorsPolicy");
+app.UseRouting();
+
+app.UseCors();
 
 app.UseAuthorization();
 

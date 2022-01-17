@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-      options.UseSqlite("Data Source=./Data/AppDB.db"));
+    options.UseSqlite(builder.Configuration["ConnectionStrings:DefaultConnection"]));
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

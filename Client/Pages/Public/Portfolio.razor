@@ -19,7 +19,7 @@
                             </p>
                         </div>
 
-                        <button class="btn btn-primary stretched-link">
+                        <button @onclick="() => _showingExamplePortfolioProjectModalWindow = true" class="btn btn-primary stretched-link">
                             <i class="fas fa-info-circle"></i> More information
                         </button>
                     </div>
@@ -36,7 +36,7 @@
                             </p>
                         </div>
 
-                        <button class="btn btn-primary stretched-link">
+                        <button @onclick="() => _showingExamplePortfolioProjectModalWindow = true" class="btn btn-primary stretched-link">
                             <i class="fas fa-info-circle"></i> More information
                         </button>
                     </div>
@@ -53,7 +53,7 @@
                             </p>
                         </div>
 
-                        <button class="btn btn-primary stretched-link">
+                        <button @onclick="() => _showingExamplePortfolioProjectModalWindow = true" class="btn btn-primary stretched-link">
                             <i class="fas fa-info-circle"></i> More information
                         </button>
                     </div>
@@ -63,13 +63,20 @@
     </div>
 </main>
 
+@if (_showingExamplePortfolioProjectModalWindow == true)
+{
+    <Client.Components.Public.Portfolio.ExamplePortfolioProjectModalWindow ParentMethodToCallOnClickBtnClose="() => _showingExamplePortfolioProjectModalWindow = false"/>
+}
+
 @code {
-private string _exampleExcerpt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida eget tellus nec ornare." +
-                                " Mauris ac nisi sit amet erat feugiat consequat id sit amet erat. Integer at erat vitae est volutpat gravida sit amet nec velit." + 
-                                " Phasellus et faucibus ex, id feugiat mi. Etiam justo est, sodales nec convallis non, pulvinar in nulla." + 
-                                " Proin sed rutrum neque, ut posuere est. Pellentesque consequat nunc sit amet libero tempus, vitae lacinia est fringilla." + 
-                                " Fusce ullamcorper pellentesque pulvinar. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." + 
-                                " tempus nisl et tellus efficitur, ac facilisis sapien tristique. Etiam interdum nisl nec aliquet semper." + 
-                                " Curabitur sagittis leo enim, sit amet pretium nisi facilisis id. Donec non maximus nulla, vel dapibus urna." +
-                                " Aenean a lectus nibh. Nullam luctus vel magna id fermentum.";
+    private bool _showingExamplePortfolioProjectModalWindow = false;
+
+    private string _exampleExcerpt = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida eget tellus nec ornare." +
+                                    " Mauris ac nisi sit amet erat feugiat consequat id sit amet erat. Integer at erat vitae est volutpat gravida sit amet nec velit." + 
+                                    " Phasellus et faucibus ex, id feugiat mi. Etiam justo est, sodales nec convallis non, pulvinar in nulla." + 
+                                    " Proin sed rutrum neque, ut posuere est. Pellentesque consequat nunc sit amet libero tempus, vitae lacinia est fringilla." + 
+                                    " Fusce ullamcorper pellentesque pulvinar. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus." + 
+                                    " tempus nisl et tellus efficitur, ac facilisis sapien tristique. Etiam interdum nisl nec aliquet semper." + 
+                                    " Curabitur sagittis leo enim, sit amet pretium nisi facilisis id. Donec non maximus nulla, vel dapibus urna." +
+                                    " Aenean a lectus nibh. Nullam luctus vel magna id fermentum.";
 }
